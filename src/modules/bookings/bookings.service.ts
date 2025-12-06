@@ -1,4 +1,5 @@
 import { pool } from "../../config/db";
+import autoReturnExpiredBookings from "../../utils/autoReturnExpiredBookings";
 import formatDate from "../../utils/formatDate";
 
 interface BookingData {
@@ -80,6 +81,7 @@ const createBooking = async (data: BookingData) => {
 };
 
 const getAllBookings = async (userId: number, userRole: string) => {
+  await autoReturnExpiredBookings();
   if (userRole === "admin") {
     const result = await pool.query(`
       SELECT 
@@ -162,7 +164,7 @@ const updateBooking = async (
   userId: number,
   userRole: string
 ) => {
-  console.log(data, bookingId, userId, userRole);
+  await autoReturnExpiredBookings();
   if (!["admin", "customer"].includes(userRole)) {
     throw new Error("Unauthorized: User role not allowed");
   }
