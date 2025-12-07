@@ -68,8 +68,8 @@
 
 Before you begin, ensure you have the following installed:
 - **Node.js** (v18 or higher recommended)
-- **npm** or **yarn**
-- **PostgreSQL** (v12 or higher)
+- **npm** 
+- **PostgreSQL**
 - **Git**
 
 ### Installation Steps
